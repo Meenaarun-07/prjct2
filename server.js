@@ -1,11 +1,7 @@
-const express = require('express')
-const app = express()
-const port = 9000
+const { socket } = require('server/router');
+const ctrl = require('./controller');
 
-app.get('/', (req, res) => {
-  res.send('Hello meena! - welcome   MEENA')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = [
+  socket('connect', ctrl.join),
+  socket('message', ctrl.message),
+  socket('disconnect', ctrl.leave)
